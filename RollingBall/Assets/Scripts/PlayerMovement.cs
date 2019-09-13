@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 currentMousePos;
     private Vector3 oldMousePos;
-    private bool firstTouch = true;
 
     private void Start()
     {
@@ -20,17 +19,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (firstTouch)
-            {
-                currentMousePos = Input.mousePosition;
-                firstTouch = false;
-            }
+            currentMousePos = Input.mousePosition;
+        }
+
+        if(Input.GetMouseButton(0))
+        {            
             oldMousePos = currentMousePos;
             currentMousePos = Input.mousePosition;
 
             rb.AddForce(new Vector3(currentMousePos.x - oldMousePos.x, 0f, currentMousePos.y - oldMousePos.y), ForceMode.Acceleration);
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            oldMousePos = Vector3.zero;
+            currentMousePos = Vector3.zero;
         }
     }
 }
