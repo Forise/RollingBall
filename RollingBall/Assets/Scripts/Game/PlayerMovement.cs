@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private bool firstTouch = true;
     private Vector3 currentMousePos;
     private Vector3 oldMousePos;
+    private bool enable = true;
     #endregion Fields
 
     #region Mono Methods
@@ -19,45 +20,51 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!rb)
             rb = GetComponent<Rigidbody>();
+        GameController.Instance.gameLost += () => { enable = false; };
+        GameController.Instance.gameWon += () => { enable = false; };
+        GameController.Instance.gameStarted += () => { enable = true; };
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (enable)
         {
-            if (firstTouch)
+            if (Input.GetMouseButtonDown(0))
             {
-                rb.velocity = Vector3.forward * speed;
-                firstTouch = false;
+                if (firstTouch)
+                {
+                    rb.velocity = Vector3.forward * speed;
+                    firstTouch = false;
+                }
+                currentMousePos = Input.mousePosition;
             }
-            currentMousePos = Input.mousePosition;
-        }
 
-        if(Input.GetMouseButton(0))
-        {            
-            oldMousePos = currentMousePos;
-            currentMousePos = Input.mousePosition;
+            if (Input.GetMouseButton(0))
+            {
+                oldMousePos = currentMousePos;
+                currentMousePos = Input.mousePosition;
 
-            Vector3 force = new Vector3(currentMousePos.x - oldMousePos.x, 0f, currentMousePos.y - oldMousePos.y);
-            rb.AddForce(new Vector3(force.x, 0f, force.z > 0 ? force.z : 0f), ForceMode.Acceleration);
-        }
+                Vector3 force = new Vector3(currentMousePos.x - oldMousePos.x, 0f, currentMousePos.y - oldMousePos.y);
+                rb.AddForce(new Vector3(force.x, 0f, force.z > 0 ? force.z : 0f), ForceMode.Acceleration);
+            }
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            oldMousePos = Vector3.zero;
-            currentMousePos = Vector3.zero;
+            if (Input.GetMouseButtonUp(0))
+            {
+                oldMousePos = Vector3.zero;
+                currentMousePos = Vector3.zero;
 
-            StopAllCoroutines();
-            StartCoroutine(SlowingCoroutine());
-        }
+                StopAllCoroutines();
+                StartCoroutine(SlowingCoroutine());
+            }
 
-        if (transform.position.x > wallPos)
-        {
-            transform.position = new Vector3(wallPos, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x < -wallPos)
-        {
-            transform.position = new Vector3(-wallPos, transform.position.y, transform.position.z);
+            if (transform.position.x > wallPos)
+            {
+                transform.position = new Vector3(wallPos, transform.position.y, transform.position.z);
+            }
+            else if (transform.position.x < -wallPos)
+            {
+                transform.position = new Vector3(-wallPos, transform.position.y, transform.position.z);
+            }
         }
     }
     #endregion MonoMethods
@@ -70,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity -= Vector3.forward;
             yield return null;
         }
+        rb.velocity = Vector3.forward * speed;
     }
     #endregion Methods
 }
