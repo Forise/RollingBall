@@ -62,11 +62,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AudioControl.cs" />
+    <Compile Include="Assets\Scripts\AudioDispatcher.cs" />
+    <Compile Include="Assets\Scripts\Data\Settings.cs" />
     <Compile Include="Assets\Scripts\FollowToObject.cs" />
-    <Compile Include="Assets\Scripts\InputControl.cs" />
-    <Compile Include="Assets\Scripts\Level.cs" />
+    <Compile Include="Assets\Scripts\Game\GameController.cs" />
+    <Compile Include="Assets\Scripts\Game\GameEventArgs.cs" />
+    <Compile Include="Assets\Scripts\Game\Level.cs" />
+    <Compile Include="Assets\Scripts\Game\Player.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Patterns\EventManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\MonoSingleton.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Patterns\StateMachine\State.cs" />
+    <Compile Include="Assets\Scripts\Patterns\StateMachine\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\SettingsControl.cs" />
+    <Compile Include="Assets\Scripts\UI\EventManager_Window.cs" />
+    <Compile Include="Assets\Scripts\UI\UIControl.cs" />
+    <Compile Include="Assets\Scripts\UI\UIPopUp.cs" />
+    <Compile Include="Assets\Scripts\UI\UIWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\UIDialoguePopUp.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\UIMainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\UISettings.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

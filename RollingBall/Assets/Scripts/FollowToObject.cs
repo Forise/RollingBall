@@ -2,6 +2,7 @@
 
 public class FollowToObject : MonoBehaviour
 {
+    #region Fields
     public GameObject objectToFollow;
     public bool relative;
     public bool XAxis;
@@ -18,12 +19,16 @@ public class FollowToObject : MonoBehaviour
 
     [SerializeField]
     private bool isFollowing = false;
+    #endregion Fields
 
+    #region Properties
     public bool IsFollowing
     {
         get => isFollowing;
     }
+    #endregion Properties
 
+    #region Mono Methods
     private void Awake()
     {
         Init();
@@ -110,7 +115,9 @@ public class FollowToObject : MonoBehaviour
             }
         }
     }
+    #endregion Mono Methods
 
+    #region Methods
     public void SetupObject(GameObject obj)
     {
         StopFollow();
@@ -139,4 +146,5 @@ public class FollowToObject : MonoBehaviour
         objectToFollow = null;
         isFollowing = false;
     }
+    #endregion Methods
 }

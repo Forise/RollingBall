@@ -2,10 +2,13 @@
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    #region Fields
     private static T instance;
 
     private static bool wasDestroyed;
+    #endregion Fields
 
+    #region Properties
     public static T Instance
     {
         get
@@ -28,7 +31,9 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             return instance;
         }
     }
+    #endregion Properties
 
+    #region Mono Methods
     protected virtual void OnDestroy()
     {
         if (instance)
@@ -37,4 +42,5 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         instance = null;
         wasDestroyed = true;
     }
+    #endregion Mono Methods
 }
