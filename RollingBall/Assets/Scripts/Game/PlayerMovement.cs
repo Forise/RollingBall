@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         GameController.Instance.gameStarted += () => { enable = true; };
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (enable)
         {
